@@ -15,6 +15,7 @@ export default new Vuex.Store({
         member: false,
         connecte: false,
         members: false,
+        conversations: false,
     },
     mutations: {
         setToken(state, token) {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
         },
         setMembers(state, members) {
             state.members = members;
+        },
+        setConversations(state, conversations) {
+            state.conversations = conversations;
         }
     },
     actions: {},

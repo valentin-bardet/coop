@@ -27,12 +27,7 @@ export default {
         .get("members", {
           token: this.$store.state.token,
         })
-        .then(
-          (response) => (
-            console.log(response.data),
-            this.$store.commit("setMembers", response.data)
-          )
-        )
+        .then((response) => this.$store.commit("setMembers", response.data))
         .catch((error) => alert(error.response.data.message));
     },
   },

@@ -4,7 +4,7 @@
     <section class="content">
       <h1>Members</h1>
       <article
-        v-for="membre in membres"
+        v-for="membre in this.$store.state.members"
         :key="membre.id"
       >
         <router-link
@@ -58,17 +58,17 @@ export default {
       currentUser: null,
     };
   },
+
   methods: {
-    chargerMembres() {
+    getMembers() {
       this.$api
         .get("members", {
           token: this.$store.state.token,
         })
-        .then((data) => (this.membres = data.data));
+        .then((response) => this.$store.commit("setMembers", response.data))
+        .catch((error) => alert(error.response.data.message));
     },
     confirmDel(usrId, usrFullName) {
-      console.log(usrId);
-      console.log(usrFullName);
       this.currentUser = usrId;
       this.popupContent =
         `<section><h2>Etes vous sur de vouloir supprimer ` +
@@ -77,18 +77,18 @@ export default {
         <button @click="annuler">Annuler</button><button @click="confirm">Supprimer</button></div></section>`;
     },
     confirm() {
-      console.log(this.currentUser);
       this.popupContent = "";
+      this.$api
+        .delete(`members/${this.currentUser}`, {
+          id: this.currentUser,
+          token: this.$store.state.token,
+        })
+        .then((data) => this.getMembers());
     },
     annuler() {
-      console.log("annuler");
       this.currentUser = "";
       this.popupContent = "";
-      this.chargerMembres();
     },
-  },
-  created() {
-    this.chargerMembres();
   },
 };
 </script>
