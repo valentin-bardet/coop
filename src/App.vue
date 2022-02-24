@@ -1,13 +1,43 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  watch: {
+    $route() {
+      this.verificationConnexion();
+    },
+  },
+  mounted() {
+    this.verificationConnexion();
+    this.getMembers();
+  },
+  methods: {
+    verificationConnexion() {
+      if (this.$route.name == "Connexion") return;
+      if (this.$route.name == "CreationCompte") return;
+      if (!this.$store.state.token) {
+        this.$router.push("/connexion");
+      }
+    },
+    getMembers() {
+      this.$api
+        .get("members", {
+          token: this.$store.state.token,
+        })
+        .then(
+          (response) => (
+            console.log(response.data),
+            this.$store.commit("setMembers", response.data)
+          )
+        )
+        .catch((error) => alert(error.response.data.message));
+    },
+  },
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -15,6 +45,13 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+* {
+  margin: 0;
 }
 
 #nav {
