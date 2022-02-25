@@ -3,21 +3,8 @@
 ## URL publique
 [coop.valentinbardet.dev](https://coop.valentinbardet.dev)
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-Fonctionnalités intégrés
+### Fonctionnalités intégrés
 - Création d'un compte
 -  Connexion
 - Poster un message dans une conversation
