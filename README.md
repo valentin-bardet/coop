@@ -16,6 +16,7 @@
 - Depuis un message, cliquer sur le nom du membre pour voir sa fiche
 - Chaque membre présente un avatar 
 -  Pouvoir supprimer un membre
+- Pouvoir supprimer une conversation
 
 
 
