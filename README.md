@@ -1,5 +1,8 @@
 # coop
 
+## URL publique
+[coop.valentinbardet.dev](https://coop.valentinbardet.dev)
+
 ## Project setup
 ```
 npm install
